@@ -1,8 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 bp = Blueprint('login', __name__)
 
 
 @bp.route('/login')
 def index():
-    return 'login'
+    return render_template('login.html')
