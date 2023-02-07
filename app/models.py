@@ -1,3 +1,4 @@
+from flask_login import UserMixin
 from datetime import datetime
 
 from sqlalchemy import DateTime
@@ -5,8 +6,8 @@ from sqlalchemy import DateTime
 from app.app import db
 
 
-class Users(db.Model):
-    uid = db.Column(db.Integer, primary_key=True)
+class Users(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(1000))
     username = db.Column(db.String(1000), unique=True)
     email = db.Column(db.String(100), unique=True)
