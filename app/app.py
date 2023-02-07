@@ -21,8 +21,8 @@ def create_app():
     from .models import User
 
     @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
+    def load_user(user_uid):
+        return User.query.get(int(user_uid))
 
     # blueprint for routes in our app
     from app.views.index import bp as bp_index
@@ -36,6 +36,9 @@ def create_app():
 
     from app.views.register import bp as bp_register
     app.register_blueprint(bp_register)
+
+    from app.views.add_offer import bp as bp_add_offer
+    app.register_blueprint(bp_add_offer)
 
     with app.app_context():
         db.create_all()

@@ -7,7 +7,7 @@ from app.app import db
 
 
 class User(UserMixin, db.Model):
-    uid = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     username = db.Column(db.String(100), unique=True)
     email = db.Column(db.String(100), unique=True)
@@ -39,10 +39,10 @@ class Subcategory(db.Model):
 
 class Engine(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True)
+    name = db.Column(db.String(30))
     capacity = db.Column(db.Integer)
     power = db.Column(db.Integer)
-    fuel = db.Column(db.Integer)
+    fuel = db.Column(db.String(20))
 
 
 class Car(db.Model):
@@ -51,15 +51,15 @@ class Car(db.Model):
     mid = db.Column(db.Integer, db.ForeignKey('model.mid'))
     cid = db.Column(db.Integer, db.ForeignKey('category.cid'))
     sid = db.Column(db.Integer, db.ForeignKey('subcategory.sid'))
-    vin = db.Column(db.String(30), unique=True)
+    vin = db.Column(db.String(30))
     reg = db.Column(db.String(30))
     year = db.Column(db.Integer)
-    millage = db.Column(db.Integer)
+    mileage = db.Column(db.Integer)
     eid = db.Column(db.Integer, db.ForeignKey('engine.eid'))
-    transmission = db.Column(db.Integer)
+    transmission = db.Column(db.String(30))
     num_of_seats = db.Column(db.Integer)
     color = db.Column(db.String(20))
-    accident = db.Column(db.Integer)
-    uid = db.Column(db.Integer, db.ForeignKey('user.uid'))
+    accident = db.Column(db.String(30))
+    uid = db.Column(db.Integer, db.ForeignKey('user.id'))
     desc = db.Column(db.String(1000))
     country = db.Column(db.String(30))

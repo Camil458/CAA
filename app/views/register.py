@@ -26,9 +26,8 @@ def register():
             return render_template('register.html', form=form, error=error)
         else:
             # create a new user
-            new_user = User(name=name, username=username, email=email,
-                            password=generate_password_hash(password, method='sha256'))
-
+            new_user = User(name=name, username=username, email=email, password=generate_password_hash(password, method='sha256'))
+            
             # add the new user to the database
             db.session.add(new_user)
             db.session.commit()
