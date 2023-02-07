@@ -18,11 +18,11 @@ def create_app():
     login_manager.login_view = 'login.login'
     login_manager.init_app(app)
 
-    from .models import Users
+    from .models import User
 
     @login_manager.user_loader
     def load_user(user_id):
-        return Users.query.get(int(user_id))
+        return User.query.get(int(user_id))
 
     # blueprint for routes in our app
     from app.views.index import bp as bp_index

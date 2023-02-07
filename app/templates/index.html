@@ -1,4 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
-    {{ current_user.is_authenticated }}
+    {% if current_user.is_authenticated %}
+        <br/>
+        <a class="btn btn-danger" href="/add" role="button">Add offer</a>
+    {% endif %}
 {% endblock %}

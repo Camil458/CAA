@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 from werkzeug.security import generate_password_hash
 
 from app.app import db
-from app.models import Users
+from app.models import User
 from app.views.forms import RegisterForm
 
 bp = Blueprint('register', __name__)
@@ -19,15 +19,15 @@ def register():
         password = form.password.data
 
         # if this returns a user, then the email already exists in database
-        user = Users.query.filter_by(email=email, username=username).first()
+        user = User.query.filter_by(email=email, username=username).first()
 
         if user:
             error = "Username or email already in use"
             return render_template('register.html', form=form, error=error)
         else:
             # create a new user
-            new_user = Users(name=name, username=username, email=email,
-                             password=generate_password_hash(password, method='sha256'))
+            new_user = User(name=name, username=username, email=email,
+                            password=generate_password_hash(password, method='sha256'))
 
             # add the new user to the database
             db.session.add(new_user)

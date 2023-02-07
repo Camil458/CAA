@@ -4,7 +4,7 @@ from werkzeug.security import check_password_hash
 from app.views.forms import LoginForm
 from flask_login import login_user
 
-from app.models import Users
+from app.models import User
 
 bp = Blueprint('login', __name__)
 
@@ -17,7 +17,7 @@ def login():
         password = form.password.data
 
         # if this returns a user, then the email already exists in database
-        user = Users.query.filter_by(username=username).first()
+        user = User.query.filter_by(username=username).first()
 
         if user:
             if not check_password_hash(user.password, password):
