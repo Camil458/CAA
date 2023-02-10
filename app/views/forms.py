@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, IntegerField, SelectField, validators
+from wtforms import Form, StringField, PasswordField, IntegerField, SelectField, validators, EmailField
 
 
 # Login Form Class
@@ -11,7 +11,7 @@ class LoginForm(Form):
 class RegisterForm(Form):
     name = StringField('Name', [validators.Length(min=4, max=25)])
     username = StringField('Username', [validators.Length(min=4, max=25)])
-    email = StringField('Email', [validators.Length(min=6, max=50)])
+    email = EmailField('Email', [validators.Length(min=6, max=50)])
     password = PasswordField('Password', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords do not match')
@@ -20,19 +20,22 @@ class RegisterForm(Form):
 
 
 class AddForm(Form):
+
+    title = StringField('Title', [validators.Length(min=4, max=30)])
+    price = IntegerField('Price')
+
     brand = StringField('Brand', [validators.Length(min=4, max=30)])
     model = StringField('Model', [validators.Length(min=1, max=30)])
-    category = StringField('Category', [validators.Length(min=1, max=30)])
-    subcategory = StringField('Subcategory', [validators.Length(min=1, max=30)])
+    category = SelectField('Category', choices=['Hatchback', 'Sedan', 'SUV', 'Coupe', 'Convertible', 'Wagon', 'Targa', 'Minivan', 'Buggy', 'Pickup', 'Other'])
     vin = StringField('VIN number', [validators.Length(min=4, max=30)])
     reg = StringField('Registration number', [validators.Length(min=4, max=30)])
     year = IntegerField('Year of production')
     mileage = IntegerField('Mileage')
 
-    engine_name = StringField('Engine name', [validators.Length(min=1, max=30)])
-    engine_capacity = StringField('Engine capacity', [validators.Length(min=1, max=30)])
+    engine_name = StringField('Engine name', [validators.Length(max=30)])
+    engine_capacity = IntegerField('Engine capacity')
     engine_power = StringField('Engine power', [validators.Length(min=1, max=8)])
-    engine_fuel = SelectField('Engine fuel', choices=['petrol', 'diesel'])
+    engine_fuel = SelectField('Engine fuel', choices=['petrol', 'diesel', 'electric', 'gas'])
 
     transmission = SelectField('Transmission', choices=['manual', 'automat'])
     num_of_seats = IntegerField('Number of seats')

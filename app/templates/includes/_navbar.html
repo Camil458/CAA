@@ -1,20 +1,27 @@
 <nav class="navbar navbar-expand-lg bg-danger">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">CAA</a>
+  <div class="container-fluid ">
+    <a class="navbar-brand" style="font-size: xx-large; font-weight: bold" href="/">CAA</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="/about">About</a>
+          <a class="nav-link active" href="/about">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Profile</a>
-        </li>
+          {% if current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link active" href="/profile">Profile</a>
+              </li>
+          {% endif %}
+          {% if not current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link disabled">Profile</a>
+              </li>
+          {% endif %}
       </ul>
       <form class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">

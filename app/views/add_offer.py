@@ -12,39 +12,41 @@ bp = Blueprint('add_offer', __name__)
 def add_offer():
     form = AddForm(request.form)
     if request.method == 'POST' and form.validate():
+        title = form.title.data
+        price = form.price.data
+
         brand = form.brand.data
         model = form.model.data
         category = form.category.data
-        subcategory = form.subcategory.data
         vin = form.vin.data
         reg = form.reg.data
         year = form.year.data
         mileage = form.mileage.data
+        transmission = form.transmission.data
+        num_of_seats = form.num_of_seats.data
+        color = form.color.data
+        accident = form.accident.data
+        country = form.country.data
 
         engine_name = form.engine_name.data
         engine_capacity = form.engine_capacity.data
         engine_power = form.engine_power.data
         engine_fuel = form.engine_fuel.data
 
-        transmission = form.transmission.data
-        num_of_seats = form.num_of_seats.data
-        color = form.color.data
-        accident = form.accident.data
-        country = form.country.data
         desc = form.desc.data
 
         bid = create_brand(brand)
         mid = create_model(model, bid)
         cid = create_category(category)
-        sid = create_subcategory(subcategory, cid)
         eid = create_engine(engine_name, engine_capacity, engine_power, engine_fuel)
 
-        uid = current_user.get_id()
+        user_id = current_user.get_id()
 
-        # add new car offer to database
-        car_offer = Car(bid=bid, mid=mid, cid=cid, sid=sid, vin=vin, reg=reg, year=year, mileage=mileage, eid=eid,
-                        transmission=transmission, num_of_seats=num_of_seats, color=color, accident=accident, uid=uid,
-                        desc=desc, country=country)
+        car_id = create_car(bid, mid, cid, vin, reg, year, mileage, eid, transmission, num_of_seats, color,
+                            accident, country, desc)
+
+        # add new offer to database
+        car_offer = Offer(title=title, price=price, car_id=car_id, user_id=user_id)
         db.session.add(car_offer)
         db.session.commit()
 
@@ -96,21 +98,6 @@ def create_category(category_name):
         return new_category.cid
 
 
-def create_subcategory(subcategory_name, cid):
-    subcategory = Subcategory.query.filter_by(name=subcategory_name).first()
-
-    if subcategory:
-        return subcategory.sid
-    else:
-        # add new subcategory to database
-        new_subcategory = Subcategory(name=subcategory_name, cid=cid)
-
-        db.session.add(new_subcategory)
-        db.session.commit()
-
-        return new_subcategory.sid
-
-
 def create_engine(name, capacity, power, fuel):
     # add new engine
     new_engine = Engine(name=name, capacity=capacity, power=power, fuel=fuel)
@@ -119,3 +106,15 @@ def create_engine(name, capacity, power, fuel):
     db.session.commit()
 
     return new_engine.eid
+
+
+def create_car(bid, mid, cid, vin, reg, year, mileage, eid, transmission, num_of_seats, color, accident, country,
+               desc):
+    # add new car
+    new_car = Car(bid=bid, mid=mid, cid=cid, vin=vin, reg=reg, year=year, mileage=mileage, eid=eid,
+                  transmission=transmission, num_of_seats=num_of_seats, color=color, accident=accident,
+                  country=country, desc=desc)
+    db.session.add(new_car)
+    db.session.commit()
+
+    return new_car.id

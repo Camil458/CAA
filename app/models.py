@@ -31,12 +31,6 @@ class Category(db.Model):
     name = db.Column(db.String(30), unique=True)
 
 
-class Subcategory(db.Model):
-    sid = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True)
-    cid = db.Column(db.Integer, db.ForeignKey('category.cid'))
-
-
 class Engine(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30))
@@ -50,7 +44,6 @@ class Car(db.Model):
     bid = db.Column(db.Integer, db.ForeignKey('brand.bid'))
     mid = db.Column(db.Integer, db.ForeignKey('model.mid'))
     cid = db.Column(db.Integer, db.ForeignKey('category.cid'))
-    sid = db.Column(db.Integer, db.ForeignKey('subcategory.sid'))
     vin = db.Column(db.String(30))
     reg = db.Column(db.String(30))
     year = db.Column(db.Integer)
@@ -60,6 +53,13 @@ class Car(db.Model):
     num_of_seats = db.Column(db.Integer)
     color = db.Column(db.String(20))
     accident = db.Column(db.String(30))
-    uid = db.Column(db.Integer, db.ForeignKey('user.id'))
     desc = db.Column(db.String(1000))
     country = db.Column(db.String(30))
+
+
+class Offer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(30))
+    price = db.Column(db.Integer)
+    car_id = db.Column(db.Integer, db.ForeignKey('car.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
