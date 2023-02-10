@@ -46,6 +46,9 @@ def create_app():
     from app.views.profile import bp as bp_profile
     app.register_blueprint(bp_profile)
 
+    from app.views.offer import bp as bp_offer
+    app.register_blueprint(bp_offer)
+
     with app.app_context():
         db.create_all()
 

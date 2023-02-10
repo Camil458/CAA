@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <div class="d-flex">
+            <div class="col-10">
+                <h5>{{ offer.title }}</h5>
+            </div>
+            <div class="sm-2 ml-auto">
+                <h5>{{ offer.price }} zł</h5>
+            </div>
+        </div>
+        <br/>
+        <div>
+        <h6>Details:</h6>
+        <hr>
+        <p>Category:                {{ offer.category }}</p>
+        <p>Brand:                   {{ offer.brand }}</p>
+        <p>Model:                   {{ offer.model }}</p>
+        <p>VIN number:              {{ offer.vin }}</p>
+        <p>Registration:            {{ offer.reg }}</p>
+        <p>Car mileage:             {{ offer.mileage }} km</p>
+        <p>Engine:                  {{ offer.engine_name }}</p>
+        <p>Capacity:                {{ offer.engine_capacity }} cm3</p>
+        <p>Power:                   {{ offer.engine_power }} hp</p>
+        <p>Fuel type:               {{ offer.engine_fuel }}</p>
+        <p>Transmission type:       {{ offer.transmission }}</p>
+        <p>Number of seats:         {{ offer.num_of_seats }}</p>
+        <p>Car color:               {{ offer.color }}</p>
+        <p>After accident?          {{ offer.accident }}</p>
+        <p>Description:             {{ offer.description }}</p>
+        <p>Contact to the owner:    {{ offer.owner }}</p>
+        </div>
+    </div>
+{% endblock %}
