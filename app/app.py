@@ -51,6 +51,9 @@ def create_app():
     from app.views.offer import bp as bp_offer
     app.register_blueprint(bp_offer)
 
+    from app.views.delete import bp as bp_delete
+    app.register_blueprint(bp_delete)
+
     with app.app_context():
         db.create_all()
 

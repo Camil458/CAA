@@ -28,5 +28,9 @@
         <p>Description:             {{ offer.description }}</p>
         <p>Contact to the owner:    {{ offer.owner }}</p>
         </div>
+
+        {% if current_user.id == offer.owner_id %}
+            <a type="button" class="btn btn-outline-danger" href="/delete/{{ offer.id }}">Delete</a>
+        {% endif %}
     </div>
 {% endblock %}

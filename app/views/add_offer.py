@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import current_user, login_required
 
 from app.views.forms import AddForm
@@ -48,6 +48,7 @@ def add_offer():
         db.session.add(car_offer)
         db.session.commit()
 
+        flash('New offer added', 'success')
         return redirect(url_for('index.index'))
 
     return render_template('add_offer.html', form=form)
