@@ -28,11 +28,9 @@ class AddForm(Form):
     model = StringField('Model', [validators.Length(min=1, max=30)])
     category = SelectField('Category', choices=['Hatchback', 'Sedan', 'SUV', 'Coupe', 'Convertible', 'Wagon', 'Targa', 'Minivan', 'Buggy', 'Pickup', 'Other'])
     vin = StringField('VIN number', [validators.Length(min=4, max=30)])
-    reg = StringField('Registration number', [validators.Length(min=4, max=30)])
     year = IntegerField('Year of production')
     mileage = IntegerField('Mileage')
 
-    engine_name = StringField('Engine name', [validators.Length(max=30)])
     engine_capacity = IntegerField('Engine capacity')
     engine_power = StringField('Engine power', [validators.Length(min=1, max=8)])
     engine_fuel = SelectField('Engine fuel', choices=['petrol', 'diesel', 'electric', 'gas'])

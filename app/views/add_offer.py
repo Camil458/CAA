@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import current_user, login_required
 
 from app.views.forms import AddForm
@@ -19,7 +19,6 @@ def add_offer():
         model = form.model.data
         category = form.category.data
         vin = form.vin.data
-        reg = form.reg.data
         year = form.year.data
         mileage = form.mileage.data
         transmission = form.transmission.data
@@ -28,7 +27,6 @@ def add_offer():
         accident = form.accident.data
         country = form.country.data
 
-        engine_name = form.engine_name.data
         engine_capacity = form.engine_capacity.data
         engine_power = form.engine_power.data
         engine_fuel = form.engine_fuel.data
@@ -38,17 +36,19 @@ def add_offer():
         bid = create_brand(brand)
         mid = create_model(model, bid)
         cid = create_category(category)
-        eid = create_engine(engine_name, engine_capacity, engine_power, engine_fuel)
+        eid = create_engine(engine_capacity, engine_power, engine_fuel)
 
         user_id = current_user.get_id()
 
-        car_id = create_car(bid, mid, cid, vin, reg, year, mileage, eid, transmission, num_of_seats, color,
+        car_id = create_car(bid, mid, cid, vin, year, mileage, eid, transmission, num_of_seats, color,
                             accident, country, desc)
 
         # add new offer to database
         car_offer = Offer(title=title, price=price, car_id=car_id, user_id=user_id)
         db.session.add(car_offer)
         db.session.commit()
+
+        return redirect(url_for('index.index'))
 
     return render_template('add_offer.html', form=form)
 
@@ -98,9 +98,9 @@ def create_category(category_name):
         return new_category.cid
 
 
-def create_engine(name, capacity, power, fuel):
+def create_engine(capacity, power, fuel):
     # add new engine
-    new_engine = Engine(name=name, capacity=capacity, power=power, fuel=fuel)
+    new_engine = Engine(capacity=capacity, power=power, fuel=fuel)
 
     db.session.add(new_engine)
     db.session.commit()
@@ -108,10 +108,10 @@ def create_engine(name, capacity, power, fuel):
     return new_engine.eid
 
 
-def create_car(bid, mid, cid, vin, reg, year, mileage, eid, transmission, num_of_seats, color, accident, country,
+def create_car(bid, mid, cid, vin, year, mileage, eid, transmission, num_of_seats, color, accident, country,
                desc):
     # add new car
-    new_car = Car(bid=bid, mid=mid, cid=cid, vin=vin, reg=reg, year=year, mileage=mileage, eid=eid,
+    new_car = Car(bid=bid, mid=mid, cid=cid, vin=vin, year=year, mileage=mileage, eid=eid,
                   transmission=transmission, num_of_seats=num_of_seats, color=color, accident=accident,
                   country=country, desc=desc)
     db.session.add(new_car)

@@ -3,6 +3,29 @@
     <br/>
     <h1>Profile</h1>
     <div class="shadow p-3 mb-5 bg-body rounded">
-        No info yet
+        <p>Name: {{ user.name }}</p>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
     </div>
+    <h1>Your offers</h1>
+        {% if offers %}
+            {% for offer in offers %}
+                <div class="shadow p-3 mb-5 bg-body rounded">
+                    <a style="text-decoration: none; color: black" href="/offer/{{ offer.id }}"><h5>{{ offer.title }}</h5></a>
+                    <div class="d-flex">
+                        <div class="col-10">
+                                {{ offer.brand }}
+                                {{ offer.model }}
+                                {{ offer.year }}
+                        </div>
+                        <div class="sm-2 ml-auto">
+                                {{ offer.price }} zł
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if not offers %}
+            You don't have offers yet
+        {% endif %}
 {% endblock %}

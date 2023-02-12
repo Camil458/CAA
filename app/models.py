@@ -33,7 +33,6 @@ class Category(db.Model):
 
 class Engine(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30))
     capacity = db.Column(db.Integer)
     power = db.Column(db.Integer)
     fuel = db.Column(db.String(20))
@@ -45,7 +44,6 @@ class Car(db.Model):
     mid = db.Column(db.Integer, db.ForeignKey('model.mid'))
     cid = db.Column(db.Integer, db.ForeignKey('category.cid'))
     vin = db.Column(db.String(30))
-    reg = db.Column(db.String(30))
     year = db.Column(db.Integer)
     mileage = db.Column(db.Integer)
     eid = db.Column(db.Integer, db.ForeignKey('engine.eid'))
