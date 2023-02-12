@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import os
 
 # init SQLAlchemy
 db = SQLAlchemy()
@@ -11,6 +12,7 @@ def create_app():
 
     app.config.from_pyfile('../config.py')
     app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql://{app.config['DB_USER']}:{app.config['DB_PASSWORD']}@{app.config['DB_HOST']}/{app.config['DB_NAME']}"
+    app.secret_key = os.urandom(12).hex()
 
     db.init_app(app)
 
