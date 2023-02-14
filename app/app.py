@@ -26,7 +26,7 @@ def create_app():
     def load_user(user_uid):
         return User.query.get(int(user_uid))
 
-    # blueprint for routes in our app
+    # blueprint for routes
     from app.views.index import bp as bp_index
     app.register_blueprint(bp_index)
 
@@ -53,6 +53,9 @@ def create_app():
 
     from app.views.delete import bp as bp_delete
     app.register_blueprint(bp_delete)
+
+    from app.views.search import bp as bp_search
+    app.register_blueprint(bp_search)
 
     with app.app_context():
         db.create_all()

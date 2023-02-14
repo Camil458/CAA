@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block body %}
+    {% from "includes/_formhelpers.html" import render_field %}
+    <br/>
+    <h1>Search</h1>
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <form method="POST" action="">
+            <div class="form-group">
+                {{render_field(form.category, class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{render_field(form.brand, class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{render_field(form.model, class_="form-control")}}
+            </div>
+            <p style="margin-bottom: 0">Production:</p>
+            <div class="d-flex p-2 justify-content-between" style="border-style: solid; border-width: 1px; border-radius: 6px; border-color: lightgray">
+                <div class="form-group d-flex">
+                    {{render_field(form.from_year, class_="form-control")}}
+                </div>
+
+                <div class="form-group d-flex">
+                    {{render_field(form.to_year, class_="form-control")}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{render_field(form.mileage, class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{render_field(form.transmission, class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{render_field(form.accident, class_="form-control")}}
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

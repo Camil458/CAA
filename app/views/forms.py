@@ -20,13 +20,14 @@ class RegisterForm(Form):
 
 
 class AddForm(Form):
-
     title = StringField('Title', [validators.Length(min=4, max=30)])
     price = IntegerField('Price')
 
     brand = StringField('Brand', [validators.Length(min=4, max=30)])
     model = StringField('Model', [validators.Length(min=1, max=30)])
-    category = SelectField('Category', choices=['Hatchback', 'Sedan', 'SUV', 'Coupe', 'Convertible', 'Wagon', 'Targa', 'Minivan', 'Buggy', 'Pickup', 'Other'])
+    category = SelectField('Category',
+                           choices=['Hatchback', 'Sedan', 'SUV', 'Coupe', 'Convertible', 'Wagon', 'Targa', 'Minivan',
+                                    'Buggy', 'Pickup', 'Other'])
     vin = StringField('VIN number', [validators.Length(min=4, max=30)])
     year = IntegerField('Year of production')
     mileage = IntegerField('Mileage')
@@ -41,3 +42,17 @@ class AddForm(Form):
     accident = SelectField('Accident', choices=['no', 'yes'])
     country = StringField('Country of origin', [validators.Length(min=2, max=30)])
     desc = StringField('Description', [validators.Length(max=1000)])
+
+
+class SearchForm(Form):
+    category = SelectField('Category',
+                           choices=['', 'Hatchback', 'Sedan', 'SUV', 'Coupe', 'Convertible', 'Wagon', 'Targa', 'Minivan',
+                                    'Buggy', 'Pickup', 'Other'])
+
+    brand = StringField('Brand', [validators.Length(max=30)])
+    model = StringField('Model', [validators.Length(max=30)])
+    from_year = IntegerField('From', [validators.optional()])
+    to_year = IntegerField('To', [validators.optional()])
+    mileage = IntegerField('Max mileage', [validators.optional()])
+    transmission = SelectField('Transmission', choices=['', 'manual', 'automat'])
+    accident = SelectField('Accident', choices=['', 'no', 'yes'])
