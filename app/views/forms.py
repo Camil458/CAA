@@ -51,8 +51,10 @@ class SearchForm(Form):
 
     brand = StringField('Brand', [validators.Length(max=30)])
     model = StringField('Model', [validators.Length(max=30)])
-    from_year = IntegerField('From', [validators.optional()])
-    to_year = IntegerField('To', [validators.optional()])
+    year_from = IntegerField('From', [validators.optional()])
+    year_to = IntegerField('To', [validators.optional()])
+    price_from = IntegerField('From', [validators.optional()])
+    price_to = IntegerField('To', [validators.optional()])
     mileage = IntegerField('Max mileage', [validators.optional()])
     transmission = SelectField('Transmission', choices=['', 'manual', 'automat'])
     accident = SelectField('Accident', choices=['', 'no', 'yes'])

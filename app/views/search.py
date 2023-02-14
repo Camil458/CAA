@@ -15,8 +15,10 @@ def search():
         category = form.category.data
         brand = form.brand.data
         model = form.model.data
-        from_year = form.from_year.data
-        to_year = form.to_year.data
+        year_from = form.year_from.data
+        year_to = form.year_to.data
+        price_from = form.price_from.data
+        price_to = form.price_to.data
         mileage = form.mileage.data
         transmission = form.transmission.data
         accident = form.accident.data
@@ -39,11 +41,17 @@ def search():
             if model:
                 if model != _model.name:
                     verified = False
-            if from_year:
-                if from_year > _car.year:
+            if year_from:
+                if year_from > _car.year:
                     verified = False
-            if to_year:
-                if to_year < _car.year:
+            if year_to:
+                if year_to < _car.year:
+                    verified = False
+            if price_from:
+                if price_from > offer.price:
+                    verified = False
+            if price_to:
+                if price_to < offer.price:
                     verified = False
             if mileage:
                 if mileage < _car.mileage:

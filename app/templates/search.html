@@ -17,11 +17,21 @@
             <p style="margin-bottom: 0">Production:</p>
             <div class="d-flex p-2 justify-content-between" style="border-style: solid; border-width: 1px; border-radius: 6px; border-color: lightgray">
                 <div class="form-group d-flex">
-                    {{render_field(form.from_year, class_="form-control")}}
+                    {{render_field(form.year_from, class_="form-control")}}
                 </div>
 
                 <div class="form-group d-flex">
-                    {{render_field(form.to_year, class_="form-control")}}
+                    {{render_field(form.year_to, class_="form-control")}}
+                </div>
+            </div>
+            <p style="margin-bottom: 0">Price:</p>
+            <div class="d-flex p-2 justify-content-between" style="border-style: solid; border-width: 1px; border-radius: 6px; border-color: lightgray">
+                <div class="form-group d-flex">
+                    {{render_field(form.price_from, class_="form-control")}}
+                </div>
+
+                <div class="form-group d-flex">
+                    {{render_field(form.price_to, class_="form-control")}}
                 </div>
             </div>
 
